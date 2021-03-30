@@ -36,6 +36,7 @@ blueprint = Blueprint("Templates", url_prefix="/templates")
 )
 async def index(request):
     query = request.args.get("filter", "").lower()
+    data = await helpers.async_get_valid_templates(request, query)
     data = await asyncio.to_thread(helpers.get_valid_templates, request, query)
     return response.json(data)
 

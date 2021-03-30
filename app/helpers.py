@@ -42,6 +42,15 @@ def get_valid_templates(request, query: str = "") -> list[dict]:
     return [template.jsonify(request.app) for template in templates]
 
 
+async def async_get_valid_templates(request, query: str = "") -> list[dict]:
+    templates = Template.async_objects.filter(valid=True, _exclude="_custom")
+    if query:
+        templates = [t async for t in templates if t.matches(query)]
+    else:
+        templates = sorted([t async for t in templates])
+    return [template.jsonify(request.app) for template in templates]
+
+
 def get_example_images(request, query: str = "") -> list[tuple[str, str]]:
     templates = Template.objects.filter(valid=True, _exclude="_custom")
     if query:
