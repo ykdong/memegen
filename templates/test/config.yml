@@ -1,11 +1,11 @@
-name: Test
+name: ''
 source:
 text:
   - color: white
     style: upper
     anchor_x: 0.0
     anchor_y: 0.0
-    angle: 10.0
+    angle: 0.0
     scale_x: 1.0
     scale_y: 0.2
   - color: white
@@ -15,11 +15,11 @@ text:
     angle: 0.0
     scale_x: 1.0
     scale_y: 0.2
-styles:
-  - sample
 example:
   - your text
   - goes here
+styles:
+  -
 overlay:
   - center_x: 0.5
     center_y: 0.5

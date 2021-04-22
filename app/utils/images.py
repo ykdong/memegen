@@ -139,7 +139,11 @@ def render_image(
             stroke_fill=stroke_fill,
         )
 
-        box = box.rotate(angle, resample=Image.BICUBIC, expand=True)
+        # box = box.rotate(angle, resample=Image.BICUBIC, expand=True)
+        translate = (-angle, -angle)  # if angle else (0, 0)
+        box = box.rotate(
+            angle, resample=Image.BICUBIC, expand=True, translate=translate
+        )
         image.paste(box, point, box)
 
     if settings.DEBUG:
