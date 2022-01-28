@@ -73,7 +73,7 @@ class Template:
     def image(self) -> Path:
         return self.get_image()
 
-    def get_image(self, style: str = "") -> Path:
+    def get_image(self, style: str = "", *, animated: bool = False) -> Path:
         style = style or settings.DEFAULT_STYLE
 
         if utils.urls.schema(style):
@@ -82,8 +82,13 @@ class Template:
 
         self.directory.mkdir(exist_ok=True)
         for path in self.directory.iterdir():
-            if path.stem == style and path.suffix != settings.PLACEHOLDER_SUFFIX:
-                return path
+            if path.stem != style:
+                continue
+            if path.suffix == settings.PLACEHOLDER_SUFFIX:
+                continue
+            if path.suffix == ".gif" and not animated:
+                continue
+            return path
 
         if style == settings.DEFAULT_STYLE:
             logger.debug(f"No default background image for template: {self.id}")

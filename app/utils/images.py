@@ -216,7 +216,7 @@ def render_animation(
     frames = []
 
     pad = all(size) if pad is None else pad
-    source = Image.open(template.get_image(style="animated"))
+    source = Image.open(template.get_image(animated=True))
     total = getattr(source, "n_frames", 1)
     if maximum_frames >= total:
         modulus = 1.0
